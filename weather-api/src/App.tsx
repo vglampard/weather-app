@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { useState, useEffect } from "react";
 import { WeatherDisplay } from "./components/WeatherDisplay/WeatherDisplay";
+import Snowfall from "react-snowfall";
 
 const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
 
@@ -43,6 +44,7 @@ function App() {
 
 	return (
 		<div className="App">
+			{/snow/.test(weatherData.description) && <Snowfall />}
 			<header className="App-header">
 				<form onSubmit={(e) => handleSubmit(e)}>
 					<input
