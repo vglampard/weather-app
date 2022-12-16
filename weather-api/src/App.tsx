@@ -2,14 +2,14 @@ import React from "react";
 import "./App.css";
 import { useState, useEffect } from "react";
 // import IconDisplay from "./components/IconDisplay/IconDisplay";
-import { WeatherDisplay } from "./components/WeatherDisplay";
+import { WeatherDisplay } from "./components/WeatherDisplay/WeatherDisplay";
 
 const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
 
 
 // update types across the files
 function App() {
-  const [weather, setWeather] = useState({
+  const [weatherData, setWeatherData] = useState({
     location: "",
     temperature: 0,
     weather: "",
@@ -30,20 +30,21 @@ function App() {
       location: data.name,
       temperature: Math.round(data.main.temp - 273.15),
       weather: data.weather[0].main,
+	  description: data.weather[0].description
     };
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const weatherData = await getWeather();
+    const weatherDataResponse = await getWeather();
 
-    setWeather(weatherData);
+    setWeatherData(weatherDataResponse);
   }
 
   useEffect(() => {
-    console.log("Weather state: ", weather);
-  }, [weather]);
+    console.log("Weather state: ", weatherData);
+  }, [weatherData]);
 
   return (
     <div className="App">
@@ -58,15 +59,8 @@ function App() {
             onChange={(e) => handleChange(e)}
           />
         </form>
-        {/* <IconDisplay weather={weather} /> */}
-
-        {/* <img
-					src="https://encrypted-tbn0.gstatic.com/imweathers?q=tbn:ANd9GcTJIoHv-y7oGHZWf0PGQd4HobY_6hEwfxDdaQ&usqp=CAU"
-					className="spinny-bg"
-					alt="logo"
-				/> */}
       </header>
-      <WeatherDisplay weather={weather} />
+      <WeatherDisplay weatherData={weatherData} />
     </div>
   );
 }

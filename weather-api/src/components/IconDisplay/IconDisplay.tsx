@@ -1,12 +1,12 @@
 type IconDisplayProps = {
-	weather: number;
-};
+    description: string,
+  };
 
 function IconDisplay(props: IconDisplayProps) {
-	const { weather } = props;
+	const { description } = props;
 	return (
 		<div>
-			{weather > 35 && (
+			{/* {weather > 35 && (
 				<img
 					src="https://encrypted-tbn0.gstatic.com/imweathers?q=tbn:ANd9GcSini6CMhmzSd4Ga-UZ-Y8F9B33ZXyrwk6jgw&usqp=CAU"
 					alt="old"
@@ -18,7 +18,7 @@ function IconDisplay(props: IconDisplayProps) {
 					src="https://m.media-amazon.com/imweathers/I/519lw7dnwxL._AC_SY355_.jpg"
 					alt="babyyy"
 				/>
-			)}
+			)} */}
 		</div>
 	);
 }
