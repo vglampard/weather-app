@@ -59,8 +59,9 @@ function App() {
             onChange={(e) => handleChange(e)}
           />
         </form>
+		<WeatherDisplay weatherData={weatherData} />
       </header>
-      <WeatherDisplay weatherData={weatherData} />
+
     </div>
   );
 }
