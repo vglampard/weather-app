@@ -1,74 +1,69 @@
 import React from "react";
 import "./App.css";
 import { useState, useEffect } from "react";
-import { ImageDisplay } from "./components/ImageDisplay/ImageDisplay";
+// import IconDisplay from "./components/IconDisplay/IconDisplay";
+
+const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
 
 function App() {
-  const [age, setAge] = useState(0);
-  const [gender, setGender] = useState((""))
-  const [name, setName] = useState("");
+	const [weather, setWeather] = useState({
+		location: "",
+		temperature: 0,
+		weather: "",
+	});
+	const [location, setLocation] = useState("");
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setName(e.target.value);
-  }
+	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+		setLocation(e.target.value);
+	}
 
-  async function getAge(){
-    const result = await fetch(`https://api.agify.io/?name=${name}`);
-    const data = await result.json();
-    return data.age;
-  }
+	async function getWeather() {
+		const result = await fetch(
+			`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`
+		);
+		const data = await result.json();
+		return {
+			location: data.name,
+			temperature: Math.round(data.main.temp - 273.15),
+			weather: data.weather[0].main,
+		};
+	}
 
-  async function getGender(){
-    const result = await fetch(`https://api.genderize.io?name=${name}`);
-    const data = await result.json();
-    return data.gender;
-  
-  }
+	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+		const weatherData = await getWeather();
 
-    const genderData = await getGender();
-    console.log("gender: ", genderData);
+		setWeather(weatherData);
+	}
 
-    const ageData = await getAge();
-    console.log("age: ", ageData);
+	useEffect(() => {
+		console.log("Weather state: ", weather);
+	}, [weather]);
 
-    setAge(ageData);
-    setGender(genderData)
-  }
+	return (
+		<div className="App">
+			<header className="App-header">
+				{/* {weather > 0 && <h1 className="spinny-spinny">{weather.location}</h1>} */}
 
-  useEffect(() => {
-    console.log("gender state: ", gender);
-  }, [gender]);
+				<form onSubmit={(e) => handleSubmit(e)}>
+					<input
+						type="text"
+						placeholder="your location here"
+						value={location}
+						onChange={(e) => handleChange(e)}
+					/>
+				</form>
+				{/* <IconDisplay weather={weather} /> */}
 
-  useEffect(() => {
-    console.log("gender state: ", age);
-  }, [age]);
-
-  return (
-    <div className="App">
-      <header className="App-header">
-
-        {age > 0 && <h1 className="spinny-spinny">{age}</h1>}
-
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input
-            type="text"
-            placeholder="your name here"
-            value={name}
-            onChange={(e) => handleChange(e)}
-          />
-      
-        </form>
-        <ImageDisplay age={age} />
-        
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJIoHv-y7oGHZWf0PGQd4HobY_6hEwfxDdaQ&usqp=CAU" className="spinny-bg" alt="logo" />
-
-      
-      </header>
-    </div>
-  );
+				{/* <img
+					src="https://encrypted-tbn0.gstatic.com/imweathers?q=tbn:ANd9GcTJIoHv-y7oGHZWf0PGQd4HobY_6hEwfxDdaQ&usqp=CAU"
+					className="spinny-bg"
+					alt="logo"
+				/> */}
+			</header>
+		</div>
+	);
 }
 
 export default App;
