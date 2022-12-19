@@ -1,4 +1,6 @@
-const rainOptions: any = {
+import type { ISourceOptions } from "tsparticles-engine";
+
+const rainOptions: ISourceOptions = {
 	detectRetina: true,
 	fpsLimit: 60,
 	interactivity: {
