@@ -13,7 +13,7 @@ import { loadFull } from "tsparticles";
 import rainOptions from "./data/rainOptions";
 
 const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
-
+console.log(apiKey)
 function App() {
 	const [weatherData, setWeatherData] = useState({
 		location: "",
