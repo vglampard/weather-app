@@ -1,3 +1,5 @@
+
+
 .App {
 	text-align: center;
 	transition: 0.5s;
@@ -17,17 +19,18 @@
 	}
 }
 .clear-background {
-	background: radial-gradient(#559fe9, #c0dfff);;
-	
+	/* background: radial-gradient(#559fe9, #c0dfff);; */
+	background-image: url(/images/day.jpg);
 	
 }
 
 .snow-background {
-	background-color: #212e49;
+	background-image: url(/images/snow.jpg);
 }
 
 .rain-background {
-	background-color: #254d76;
+	/* background-color: #254d76; */
+	background-image: url(/images/night.jpg);
 }
 
 .default-background {
