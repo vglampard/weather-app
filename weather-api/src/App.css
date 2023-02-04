@@ -1,6 +1,9 @@
 .App {
 	text-align: center;
 	transition: 0.5s;
+	background: url(https://rare-gallery.com/thumbs/572673-landscape-scotland.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .App-logo {
@@ -14,7 +17,9 @@
 	}
 }
 .clear-background {
-	background-color: #78b2eb;
+	background: radial-gradient(#559fe9, #c0dfff);;
+	
+	
 }
 
 .snow-background {
@@ -26,8 +31,12 @@
 }
 
 .default-background {
-	background-color: #292f35;
+	background-color: #c2d7ed;
 }
+
+/* .container{
+
+} */
 
 .App-header {
 	min-height: 100vh;

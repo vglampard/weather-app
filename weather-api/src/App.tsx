@@ -12,7 +12,7 @@ import type { Container, Engine } from "tsparticles-engine";
 import { loadFull } from "tsparticles";
 import rainOptions from "./data/rainOptions";
 
-const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
+const apiKey = "7f7ab00ad3230aa55f51e1f74edbb64f";
 console.log(apiKey)
 function App() {
 	const [weatherData, setWeatherData] = useState({
@@ -53,6 +53,12 @@ function App() {
 		};
 	}
 
+	function getTime (){
+		var today = new Date();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+console.log(time)
+	}
+
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		const weatherDataResponse = await getWeather();
@@ -62,8 +68,9 @@ function App() {
 	useEffect(() => {
 		console.log("Weather state: ", weatherData);
 	}, [weatherData]);
-
+getTime();
 	return (
+		<div className="container">
 		<div
 			className={
 				/clear/.test(weatherData.description)
@@ -95,6 +102,7 @@ function App() {
 				</form>
 				<WeatherDisplay weatherData={weatherData} />
 			</header>
+		</div>
 		</div>
 	);
 }
