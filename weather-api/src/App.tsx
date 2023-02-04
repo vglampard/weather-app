@@ -91,6 +91,7 @@ getTime();
 				/>
 			)}
 			{/snow/.test(weatherData.description) && <Snowfall />}
+	
 			<header className="App-header">
 				<form onSubmit={(e) => handleSubmit(e)}>
 					<input
