@@ -22,7 +22,11 @@ function App() {
 		description: "",
 	});
 	const [location, setLocation] = useState("");
-
+	const [suggestions, setSuggestions] = useState(false)
+	function handleClick(){
+		setSuggestions(!suggestions)
+	}
+	
 	//## TS PARTICLES FUNCTIONS
 	const particlesInit = useCallback(async (engine: Engine) => {
 		console.log(engine);
@@ -91,7 +95,7 @@ getTime();
 				/>
 			)}
 			{/snow/.test(weatherData.description) && <Snowfall />}
-	
+		
 			<header className="App-header">
 				<form onSubmit={(e) => handleSubmit(e)}>
 					<input
@@ -99,10 +103,15 @@ getTime();
 						placeholder="your location here"
 						value={location}
 						onChange={(e) => handleChange(e)}
-					/>
+					/> <br></br>
 				</form>
+			
 				<WeatherDisplay weatherData={weatherData} />
+				{suggestions && <p> Look for rainy or snowy spots... Kukui,  </p>}
 			</header>
+		</div>
+		<div className = "footer">
+		Look for rainy or snowy spots for the most fun... Kukui
 		</div>
 		</div>
 	);
