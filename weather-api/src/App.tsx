@@ -22,11 +22,12 @@ function App() {
 		description: "",
 	});
 	const [location, setLocation] = useState("");
-	const [suggestions, setSuggestions] = useState(false)
-	function handleClick(){
-		setSuggestions(!suggestions)
-	}
-	
+
+
+function openSearch(find: String){
+	window.open(`https://www.google.com/search?q=${find}+places+on+earth`)
+}
+
 	//## TS PARTICLES FUNCTIONS
 	const particlesInit = useCallback(async (engine: Engine) => {
 		console.log(engine);
@@ -107,11 +108,10 @@ getTime();
 				</form>
 			
 				<WeatherDisplay weatherData={weatherData} />
-				{suggestions && <p> Look for rainy or snowy spots... Kukui,  </p>}
 			</header>
 		</div>
 		<div className = "footer">
-		Look for rainy or snowy spots for the most fun... Kukui
+		<button onClick={()=>openSearch("rainiest")}>Find me rain</button> <button onClick={()=>openSearch("snowiest")}>Find me snow</button>
 		</div>
 		</div>
 	);
